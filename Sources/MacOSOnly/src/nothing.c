@@ -1,2 +1,4 @@
 
-#include <SwiftUI/SwiftUI.h>
+#if !defined(__APPLE__)
+#error Apple Only
+#endif

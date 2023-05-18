@@ -1,2 +1,4 @@
 
-#include <linux/types.h>
+#if !defined(__linux)
+#error Linux only
+#endif
