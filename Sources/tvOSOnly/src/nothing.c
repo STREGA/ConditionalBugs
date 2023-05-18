@@ -2,9 +2,8 @@
     #include <TargetConditionals.h>
 #endif
 
-#if TARGET_OS_MAC
+#if TARGET_OS_TV
 
 #else
-    #error macOS Only
-
+    #error tvOS Only
 #endif

@@ -10,13 +10,23 @@ let package = Package(
     ],
     targets: [
         .target(name: "ConditionalBugs", dependencies: [
+            .targetItem(name: "AndroidOnly", condition: .when(platforms: [.android])),
+            .targetItem(name: "iOSOnly", condition: .when(platforms: [.iOS])),
             .targetItem(name: "LinuxOnly", condition: .when(platforms: [.linux])),
             .targetItem(name: "MacOSOnly", condition: .when(platforms: [.macOS])),
+            .targetItem(name: "tvOSOnly", condition: .when(platforms: [.tvOS])),
+            .targetItem(name: "WASIOnly", condition: .when(platforms: [.wasi])),
+            .targetItem(name: "watchOSOnly", condition: .when(platforms: [.watchOS])),
             .targetItem(name: "WindowsOnly", condition: .when(platforms: [.windows])),
         ]),
         
+        .target(name: "AndroidOnly"),
+        .target(name: "iOSOnly"),
         .target(name: "LinuxOnly"),
         .target(name: "MacOSOnly"),
-        .target(name: "WindowsOnly")
+        .target(name: "tvOSOnly"),
+        .target(name: "WASIOnly"),
+        .target(name: "watchOSOnly"),
+        .target(name: "WindowsOnly"),
     ]
 )

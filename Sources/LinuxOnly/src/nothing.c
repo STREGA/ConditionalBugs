@@ -1,4 +1,6 @@
 
-#if !defined(__linux)
-#error Linux only
+#if __linux__ && !__ANDROID__
+
+#else
+#error Linux Only
 #endif
