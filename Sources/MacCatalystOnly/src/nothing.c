@@ -2,8 +2,9 @@
     #include <TargetConditionals.h>
 #endif
 
-#if TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
+#if TARGET_OS_MACCATALYST
 
 #else
-    #error iOS Only
+    #error MacCatalyst Only
+
 #endif
