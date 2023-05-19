@@ -1,0 +1,118 @@
+name: Build_Every_Platform
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+jobs:
+  Android_SwiftBuild:
+    if: false #Not aware of an action for Android yet
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: swift build
+
+  iOS_XcodeBuild:
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: xcodebuild -scheme ConditionalBugs -destination "platform=tvOS,name=Any tvOS Device"
+  
+  Linux_SwiftBuild:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: swift build
+  
+  MacCatalyst_XcodeBuild:
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: xcodebuild -scheme ConditionalBugs -destination "platform=macOS,variant=Mac Catalyst"
+
+  macOS_SwiftBuild:
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: swift build
+  
+  macOS_XcodeBuild:
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: xcodebuild -scheme ConditionalBugs -destination "platform=macOS,name=Any Mac"
+
+  tvOS_XcodeBuild:
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: xcodebuild -scheme ConditionalBugs -destination "platform=tvOS,name=Any tvOS Device"
+
+  WASI_CartonBundle:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/swiftwasm/carton:latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: carton bundle
+
+  watchOS_XcodeBuild:
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: xcodebuild -scheme ConditionalBugs -destination "platform=watchOS,name=Any watchOS Device"
+
+  Windows_SwiftBUild:
+    runs-on: windows-latest
+    steps:
+    - uses: compnerd/gha-setup-swift@main
+      with:
+          branch: swift-5.8-release
+          tag: 5.8-RELEASE
+    - uses: actions/checkout@v3
+    - name: Swift Version
+      run: swift --version
+    - name: Build
+      run: swift build
