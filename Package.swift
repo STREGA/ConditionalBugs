@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
     name: "ConditionalBugs",
     products: [
-        .library(name: "ConditionalBugs", targets: ["ConditionalBugs"]),
+        .executable(name: "ConditionalBugs", targets: ["ConditionalBugs"]),
     ],
     targets: [
-        .target(name: "ConditionalBugs", dependencies: [
+        .executableTarget(name: "ConditionalBugs", dependencies: [
             .targetItem(name: "AndroidOnly", condition: .when(platforms: [.android])),
             .targetItem(name: "iOSOnly", condition: .when(platforms: [.iOS])),
             .targetItem(name: "LinuxOnly", condition: .when(platforms: [.linux])),

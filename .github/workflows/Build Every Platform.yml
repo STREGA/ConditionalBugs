@@ -104,7 +104,7 @@ jobs:
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=watchOS,name=Any watchOS Device"
 
-  Windows_SwiftBUild:
+  Windows_SwiftBuild:
     runs-on: windows-latest
     steps:
     - uses: compnerd/gha-setup-swift@main
