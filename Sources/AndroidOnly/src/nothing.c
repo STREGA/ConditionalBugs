@@ -2,5 +2,5 @@
 #if __ANDROID__
 
 #else
-#error Android Only
+    #error This module is Android Only!
 #endif

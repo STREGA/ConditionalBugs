@@ -1,9 +1,10 @@
+
 #if __APPLE__
     #include <TargetConditionals.h>
 #endif
 
-#if TARGET_OS_TV
+#if TARGET_OS_WATCH
 
 #else
-    #error tvOS Only
+    #error This module is watchOS Only!
 #endif

@@ -1,10 +1,10 @@
+
 #if __APPLE__
     #include <TargetConditionals.h>
 #endif
 
-#if TARGET_OS_MACCATALYST
+#if TARGET_OS_TV
 
 #else
-    #error MacCatalyst Only
-
+    #error This module is tvOS Only!
 #endif
