@@ -19,11 +19,11 @@ jobs:
       run: swift build
 
   iOS_XcodeBuild:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
     - name: Select Xcode version
-      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+      run: sudo xcode-select -s '/Applications/Xcode_16.app/Contents/Developer'
     - name: Swift Version
       run: swift --version
     - name: Build
@@ -39,44 +39,44 @@ jobs:
       run: swift build
   
   MacCatalyst_XcodeBuild:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
     - name: Select Xcode version
-      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+      run: sudo xcode-select -s '/Applications/Xcode_16.app/Contents/Developer'
     - name: Swift Version
       run: swift --version
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=macOS,variant=Mac Catalyst"
 
   macOS_SwiftBuild:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
     - name: Select Xcode version
-      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+      run: sudo xcode-select -s '/Applications/Xcode_16.app/Contents/Developer'
     - name: Swift Version
       run: swift --version
     - name: Build
       run: swift build
   
   macOS_XcodeBuild:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
     - name: Select Xcode version
-      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+      run: sudo xcode-select -s '/Applications/Xcode_16.app/Contents/Developer'
     - name: Swift Version
       run: swift --version
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=macOS,name=Any Mac"
 
   tvOS_XcodeBuild:
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
     - name: Select Xcode version
-      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+      run: sudo xcode-select -s '/Applications/Xcode_16.app/Contents/Developer'
     - name: Swift Version
       run: swift --version
     - name: Build
@@ -91,14 +91,14 @@ jobs:
     - name: Swift Version
       run: swift --version
     - name: Build
-      run: carton bundle
+      run: swift carton bundle
 
   watchOS_XcodeBuild:
-    runs-on: macos-13
+    runs-on: macos-16
     steps:
     - uses: actions/checkout@v3
     - name: Select Xcode version
-      run: sudo xcode-select -s '/Applications/Xcode_14.3.app/Contents/Developer'
+      run: sudo xcode-select -s '/Applications/Xcode_16.app/Contents/Developer'
     - name: Swift Version
       run: swift --version
     - name: Build
@@ -109,8 +109,8 @@ jobs:
     steps:
     - uses: compnerd/gha-setup-swift@main
       with:
-          branch: swift-5.8-release
-          tag: 5.8-RELEASE
+          branch: swift-6.0-release
+          tag: 6.0-RELEASE
     - uses: actions/checkout@v3
     - name: Swift Version
       run: swift --version
