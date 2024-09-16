@@ -22,6 +22,7 @@ let package = Package(
             .targetItem(name: "MacOSOnly",      condition: .when(platforms: [ .macOS        ])),
             .targetItem(name: "tvOSOnly",       condition: .when(platforms: [ .tvOS         ])),
             .targetItem(name: "watchOSOnly",    condition: .when(platforms: [ .watchOS      ])),
+            .targetItem(name: "visionOSOnly",   condition: .when(platforms: [ .visionOS     ])),
             .targetItem(name: "LinuxOnly",      condition: .when(platforms: [ .linux        ])),
             
             // Still not working in Xcode 16
@@ -40,6 +41,7 @@ let package = Package(
         .target(name: "MacOSOnly"),
         .target(name: "tvOSOnly"),
         .target(name: "watchOSOnly"),
+        .target(name: "visionOSOnly"),
         .target(name: "LinuxOnly"),
         
         // Still not working in Xcode 16
