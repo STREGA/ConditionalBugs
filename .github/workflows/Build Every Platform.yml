@@ -6,7 +6,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
+
 jobs:
   Android_SwiftBuild:
     if: false #Not aware of an action for Android yet
@@ -28,16 +28,19 @@ jobs:
       run: swift --version
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=tvOS,name=Any tvOS Device"
-  
+
   Linux_SwiftBuild:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - Install Swift:
+      curl -L https://swiftlang.github.io/swiftly/swiftly-install.sh | bash
+      swiftly install latest
     - name: Swift Version
       run: swift --version
     - name: Build
       run: swift build
-  
+
   MacCatalyst_XcodeBuild:
     runs-on: macos-14
     steps:
@@ -59,7 +62,7 @@ jobs:
       run: swift --version
     - name: Build
       run: swift build
-  
+
   macOS_XcodeBuild:
     runs-on: macos-14
     steps:
@@ -103,7 +106,7 @@ jobs:
       run: swift --version
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=watchOS,name=Any watchOS Device"
-      
+
   visionOS_XcodeBuild:
     runs-on: macos-14
     steps:
