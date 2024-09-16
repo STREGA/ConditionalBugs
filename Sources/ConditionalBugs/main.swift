@@ -40,3 +40,7 @@ import WASIOnly
 import WindowsOnly
 #warning("Imported WindowsOnly")
 #endif
+
+
+// Just so there is some code to compile
+let nothing: Int = 0
