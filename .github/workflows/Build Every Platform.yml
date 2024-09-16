@@ -8,7 +8,7 @@ on:
     branches: [ main ]
 
 jobs:
-  Android_SwiftBuild:
+  Android_Build-using-Swift-CLI:
     if: false #Not aware of an action for Android yet
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +18,7 @@ jobs:
     - name: Build
       run: swift build
 
-  iOS_XcodeBuild:
+  iOS_Build-using-Xcode:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
@@ -29,19 +29,22 @@ jobs:
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=tvOS,name=Any tvOS Device"
 
-  Linux_SwiftBuild:
+  Linux_Build-using-Swift-CLI:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - Install Swift:
-      curl -L https://swiftlang.github.io/swiftly/swiftly-install.sh | bash
-      swiftly install latest
+    - name: Install Swiftly
+      run: curl -L https://swiftlang.github.io/swiftly/swiftly-install.sh -o swiftly-install.sh;
+           chmod 775 swiftly-install.sh;
+           ./swiftly-install.sh --disable-confirmation
+    - name: Install Swift
+      run: swiftly install latest
     - name: Swift Version
       run: swift --version
     - name: Build
       run: swift build
 
-  MacCatalyst_XcodeBuild:
+  MacCatalyst_Build-using-Xcode:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
@@ -52,7 +55,7 @@ jobs:
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=macOS,variant=Mac Catalyst"
 
-  macOS_SwiftBuild:
+  macOS_Build-using-Swift-CLI:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
@@ -63,7 +66,7 @@ jobs:
     - name: Build
       run: swift build
 
-  macOS_XcodeBuild:
+  macOS_Build-using-Xcode:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
@@ -74,7 +77,7 @@ jobs:
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=macOS,name=Any Mac"
 
-  tvOS_XcodeBuild:
+  tvOS_Build-using-Xcode:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
@@ -85,7 +88,7 @@ jobs:
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=tvOS,name=Any tvOS Device"
 
-  WASI_CartonBundle:
+  WASI_Build-using-Swift-CLI-Carton-Plugin:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/swiftwasm/carton:latest
@@ -94,9 +97,9 @@ jobs:
     - name: Swift Version
       run: swift --version
     - name: Build
-      run: swift carton bundle
+      run: swift run carton bundle
 
-  watchOS_XcodeBuild:
+  watchOS_Build-using-Xcode:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
@@ -107,7 +110,7 @@ jobs:
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=watchOS,name=Any watchOS Device"
 
-  visionOS_XcodeBuild:
+  visionOS_Build-using-Xcode:
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
@@ -118,7 +121,7 @@ jobs:
     - name: Build
       run: xcodebuild -scheme ConditionalBugs -destination "platform=visionOS,name=Any visionOS Device"
 
-  Windows_SwiftBuild:
+  Windows_Build-using-Swift-CLI:
     runs-on: windows-latest
     steps:
     - uses: compnerd/gha-setup-swift@main
