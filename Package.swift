@@ -6,29 +6,59 @@ import PackageDescription
 let package = Package(
     name: "ConditionalBugs",
     products: [
+        // An executbale test to build
         .executable(name: "ConditionalBugs", targets: ["ConditionalBugs"]),
     ],
+    dependencies:
+        // Helpers listed at the bottom of this file
+        packageDependencies
+    ,
     targets: [
+        // Include all of the targets below, but filter them with SPM target conditionals feature
         .executableTarget(name: "ConditionalBugs", dependencies: [
-            .targetItem(name: "AndroidOnly",    condition: .when(platforms: [ .android      ])),
+            // Working in Xcode 16
             .targetItem(name: "iOSOnly",        condition: .when(platforms: [ .iOS          ])),
-            .targetItem(name: "LinuxOnly",      condition: .when(platforms: [ .linux        ])),
             .targetItem(name: "MacCatalystOnly",condition: .when(platforms: [ .macCatalyst  ])),
             .targetItem(name: "MacOSOnly",      condition: .when(platforms: [ .macOS        ])),
             .targetItem(name: "tvOSOnly",       condition: .when(platforms: [ .tvOS         ])),
-            .targetItem(name: "WASIOnly",       condition: .when(platforms: [ .wasi         ])),
             .targetItem(name: "watchOSOnly",    condition: .when(platforms: [ .watchOS      ])),
+            .targetItem(name: "LinuxOnly",      condition: .when(platforms: [ .linux        ])),
+            
+            // Still not working in Xcode 16
+            .targetItem(name: "AndroidOnly",    condition: .when(platforms: [ .android      ])),
+            .targetItem(name: "WASIOnly",       condition: .when(platforms: [ .wasi         ])),
             .targetItem(name: "WindowsOnly",    condition: .when(platforms: [ .windows      ])),
         ]),
         
-        .target(name: "AndroidOnly"),
+        // These targets should only be included when building for the given platform
+        // If they are built otherwise an error will be shown. The error menas the SPM target
+        // conditionals feature is being ignored buy the build system (looking at you Xcode)
+        
+        // Working in Xcode 16
         .target(name: "iOSOnly"),
-        .target(name: "LinuxOnly"),
         .target(name: "MacCatalystOnly"),
         .target(name: "MacOSOnly"),
         .target(name: "tvOSOnly"),
-        .target(name: "WASIOnly"),
         .target(name: "watchOSOnly"),
+        .target(name: "LinuxOnly"),
+        
+        // Still not working in Xcode 16
+        .target(name: "WASIOnly"),
+        .target(name: "AndroidOnly"),
         .target(name: "WindowsOnly"),
     ]
 )
+
+// Helpers for building some platforms
+var packageDependencies: [Package.Dependency] {
+    var deps: [Package.Dependency] = []
+
+#if os(macOS) || os(Linux) 
+    deps.append(
+        // Used to build WASI on macOS or Linux
+        .package(url: "https://github.com/swiftwasm/carton", from: "1.0.0")
+    )
+#endif
+    
+    return deps
+}
